@@ -261,7 +261,6 @@ int main( int arg_count, char *args[] )  {
         tTuple tuple = tuples[i];
         printf("(%d, %d)", tuple.x, tuple.y);
         board[tuple.y][tuple.x] = CELL_IS_ALIVE;
-        board[tuple.y][tuple.x] = CELL_IS_ALIVE;
     }
     print_board();
     usleep(SECONDS_TO_SLEEP);
