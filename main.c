@@ -69,90 +69,97 @@ void print_cell(int x, int y) {
   if (cell == CELL_IS_ALIVE) {
     printf("0");
   }
-  else {
+  else if (cell == CELL_IS_DEAD){
     printf(" ");
+  }
+  else {
+    printf("(%d, %d)", x, y);
+    printf("%d", cell);
   }
 }
 
 void print_board() {
-  for(int i = 0; i < SCREEN_HEIGHT; i++) {
+  for(int y = 0; y < SCREEN_HEIGHT; y++) {
     printf("\n");
-    for (int j = 0; j < SCREEN_WIDTH; j++) {
-      print_cell(i, j);
+    for (int x = 0; x < SCREEN_WIDTH; x++) {
+      print_cell(x, y);
     }
   }
 }
 
+int get_right_x(int x) {
+  int rightX = x + 1;
+  if (rightX >= SCREEN_WIDTH) {
+    rightX = 0;
+  }
+  return rightX;
+}
+int get_left_x(int x) {
+  int leftX = x - 1;
+  if (x - 1 < 0) {
+    leftX = SCREEN_WIDTH - 1;
+  }
+  return leftX;
+}
+
+int get_above_y(int y) {
+  int aboveY = y - 1;
+  if (aboveY < 0) {
+    aboveY = SCREEN_HEIGHT - 1;
+  }
+  return aboveY;
+}
+
+int get_below_y(int y) {
+  int belowY = y + 1;
+  if (belowY >= SCREEN_HEIGHT) {
+    belowY = 0;
+  }
+  return belowY;
+}
+
 int get_right_neighbor(int x, int y) {
-  if (x + 1 < SCREEN_WIDTH) {
-    return board[y][x + 1];
-  }
-  else {
-    return CELL_DOES_NOT_EXIST;
-  }
+  int newX = get_right_x(x);
+  return board[y][newX];
 }
 
 int get_left_neighbor(int x, int y) {
-  if (x - 1 >= 0) {
-    return board[y][x - 1];
-  }
-  else {
-    return CELL_DOES_NOT_EXIST;
-  }
+  int newX = get_left_x(x);
+  return board[y][newX];
 }
 
 int get_above_neighbor(int x, int y) {
-  if (y - 1 >= 0) {
-    return board[y - 1][x];
-  }
-  else {
-    return CELL_DOES_NOT_EXIST;
-  }
+  int newY = get_above_y(y);
+  return board[newY][x];
 }
 
 int get_below_neighbor(int x, int y) {
-  if (y + 1 < SCREEN_HEIGHT) {
-    return board[y + 1][x];
-  }
-  else {
-    return CELL_DOES_NOT_EXIST;
-  }
+  int newY = get_below_y(y);
+  return board[newY][x];
 }
 
 int get_above_right_neighbor(int x, int y) {
-  if (y - 1 >= 0 && x + 1 < SCREEN_WIDTH) {
-    return board[y - 1][x + 1];
-  }
-  else {
-    return CELL_DOES_NOT_EXIST;
-  }
+  int newY = get_above_y(y);
+  int newX = get_right_x(x);
+  return board[newY][newX];
 }
 
 int get_above_left_neighbor(int x, int y) {
-  if (y - 1 >= 0 && x - 1 >= 0) {
-    return board[y - 1][x - 1];
-  }
-  else {
-    return CELL_DOES_NOT_EXIST;
-  }
+  int newY = get_above_y(y);
+  int newX = get_left_x(x);
+  return board[newY][newX];
 }
 
 int get_below_right_neighbor(int x, int y) {
-  if (y + 1 < SCREEN_HEIGHT && x + 1 < SCREEN_WIDTH) {
-    return board[y + 1][x + 1];
-  }
-  else {
-    return CELL_DOES_NOT_EXIST;
-  }
+  int newY = get_below_y(y);
+  int newX = get_right_x(x);
+  return board[newY][newX];
 }
 
 int get_below_left_neighbor(int x, int y) {
-  if (y + 1 < SCREEN_HEIGHT && x - 1 >= 0) {
-    return board[y + 1][x - 1];
-  }
-  else {
-    return CELL_DOES_NOT_EXIST;
-  }
+  int newY = get_below_y(y);
+  int newX = get_left_x(x);
+  return board[newY][newX];
 }
 
 tNeighbors get_neighbors(int x, int y) {
@@ -198,31 +205,39 @@ int get_number_of_alive_neighbors(int x, int y) {
   return count;
 }
 
-void update_cell(int x, int y) {
-  int cell = board[x][y];
+int get_updated_cell(int x, int y) {
+  int cell = board[y][x];
   int number_of_alive_neighbors = get_number_of_alive_neighbors(x, y);
   if (cell == CELL_IS_ALIVE) {
-    if (number_of_alive_neighbors == 0 || number_of_alive_neighbors == 1) {
-      board[x][y] = CELL_IS_DEAD;
+    if (number_of_alive_neighbors < 2) {
+      return CELL_IS_DEAD;
     }
     else if (number_of_alive_neighbors == 2 || number_of_alive_neighbors == 3) {
-      // LIVE ON!
+      return CELL_IS_ALIVE;
     }
-    else if (number_of_alive_neighbors == 4) {
-      board[x][y] = CELL_IS_DEAD;
+    else if (number_of_alive_neighbors > 3) {
+      return CELL_IS_DEAD;
     }
   }
-  else {
+  else if(cell == CELL_IS_DEAD){
     if (number_of_alive_neighbors == 3) {
-      board[x][y] = CELL_IS_ALIVE;
+      return CELL_IS_ALIVE;
     }
   }
+  return cell;
 }
 
 void update_board() {
-  for(int i = 0; i < SCREEN_HEIGHT; i++) {
+  int temp_board[SCREEN_HEIGHT][SCREEN_WIDTH] = {0};
+  for(int y = 0; y < SCREEN_HEIGHT; y++) {
+    for (int x = 0; x < SCREEN_WIDTH; x++) {
+      int cell = get_updated_cell(x, y);
+      temp_board[y][x] = cell;
+    }
+  }
+  for (int i = 0; i < SCREEN_HEIGHT; i++) {
     for (int j = 0; j < SCREEN_WIDTH; j++) {
-      update_cell(i, j);
+      board[i][j] = temp_board[i][j];
     }
   }
 }
@@ -259,13 +274,12 @@ int main( int arg_count, char *args[] )  {
     // Initialize board
     for (int i = 0; i < number_of_tuples; i++) {
         tTuple tuple = tuples[i];
-        printf("(%d, %d)", tuple.x, tuple.y);
         board[tuple.y][tuple.x] = CELL_IS_ALIVE;
     }
     print_board();
     usleep(SECONDS_TO_SLEEP);
     while(1) {
-      printf("\n===============================================================================================");
+      printf("\n================================================================================");
       if (!at_least_one_cell_is_alive()) {
         printf("\nNo cells are alive. Terminating program");
         return 0;
