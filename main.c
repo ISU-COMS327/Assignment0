@@ -22,7 +22,11 @@ typedef struct {
   int right;
   int left;
   int above;
+  int above_right;
+  int above_left;
   int below;
+  int below_left;
+  int below_right;
 } tNeighbors;
 
 int is_valid_x(int x) {
@@ -115,12 +119,52 @@ int get_below_neighbor(int x, int y) {
   }
 }
 
+int get_above_right_neighbor(int x, int y) {
+  if (y - 1 >= 0 && x + 1 < SCREEN_WIDTH) {
+    return board[y - 1][x + 1];
+  }
+  else {
+    return CELL_DOES_NOT_EXIST;
+  }
+}
+
+int get_above_left_neighbor(int x, int y) {
+  if (y - 1 >= 0 && x - 1 >= 0) {
+    return board[y - 1][x - 1];
+  }
+  else {
+    return CELL_DOES_NOT_EXIST;
+  }
+}
+
+int get_below_right_neighbor(int x, int y) {
+  if (y + 1 < SCREEN_HEIGHT && x + 1 < SCREEN_WIDTH) {
+    return board[y + 1][x + 1];
+  }
+  else {
+    return CELL_DOES_NOT_EXIST;
+  }
+}
+
+int get_below_left_neighbor(int x, int y) {
+  if (y + 1 < SCREEN_HEIGHT && x - 1 >= 0) {
+    return board[y + 1][x - 1];
+  }
+  else {
+    return CELL_DOES_NOT_EXIST;
+  }
+}
+
 tNeighbors get_neighbors(int x, int y) {
     tNeighbors neighbors;
     neighbors.right = get_right_neighbor(x, y);
     neighbors.left = get_left_neighbor(x, y);
     neighbors.above = get_above_neighbor(x, y);
     neighbors.below = get_below_neighbor(x, y);
+    neighbors.below_left = get_below_left_neighbor(x, y);
+    neighbors.below_right = get_below_right_neighbor(x, y);
+    neighbors.above_right = get_above_right_neighbor(x, y);
+    neighbors.above_left = get_above_left_neighbor(x, y);
     return neighbors;
 }
 
@@ -137,6 +181,18 @@ int get_number_of_alive_neighbors(int x, int y) {
     count ++;
   }
   if (neighbors.below == CELL_IS_ALIVE) {
+    count ++;
+  }
+  if (neighbors.below_right == CELL_IS_ALIVE) {
+    count ++;
+  }
+  if (neighbors.below_left == CELL_IS_ALIVE) {
+    count ++;
+  }
+  if (neighbors.above_right == CELL_IS_ALIVE) {
+    count ++;
+  }
+  if (neighbors.above_left == CELL_IS_ALIVE) {
     count ++;
   }
   return count;
@@ -203,6 +259,7 @@ int main( int arg_count, char *args[] )  {
     // Initialize board
     for (int i = 0; i < number_of_tuples; i++) {
         tTuple tuple = tuples[i];
+        printf("(%d, %d)", tuple.x, tuple.y);
         board[tuple.y][tuple.x] = CELL_IS_ALIVE;
         board[tuple.y][tuple.x] = CELL_IS_ALIVE;
     }
@@ -210,12 +267,12 @@ int main( int arg_count, char *args[] )  {
     usleep(SECONDS_TO_SLEEP);
     while(1) {
       printf("\n===============================================================================================");
-      update_board();
-      print_board();
       if (!at_least_one_cell_is_alive()) {
         printf("\nNo cells are alive. Terminating program");
         return 0;
       }
+      update_board();
+      print_board();
       usleep(SECONDS_TO_SLEEP);
     }
     return 0;
