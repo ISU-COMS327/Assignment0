@@ -96,7 +96,7 @@ int get_right_x(int x) {
 }
 int get_left_x(int x) {
   int leftX = x - 1;
-  if (x - 1 < 0) {
+  if (leftX < 0) {
     leftX = SCREEN_WIDTH - 1;
   }
   return leftX;
@@ -278,8 +278,9 @@ int main( int arg_count, char *args[] )  {
     }
     print_board();
     usleep(SECONDS_TO_SLEEP);
+    int my_time = SECONDS_TO_SLEEP;
     while(1) {
-      printf("\n================================================================================");
+      printf("\n================================================================================%d", my_time);
       if (!at_least_one_cell_is_alive()) {
         printf("\nNo cells are alive. Terminating program");
         return 0;
@@ -287,6 +288,7 @@ int main( int arg_count, char *args[] )  {
       update_board();
       print_board();
       usleep(SECONDS_TO_SLEEP);
+      my_time += SECONDS_TO_SLEEP;
     }
     return 0;
 }
