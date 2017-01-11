@@ -67,7 +67,7 @@ void print_raw_board() {
 void print_cell(int x, int y) {
   int cell = board[y][x];
   if (cell == CELL_IS_ALIVE) {
-    printf("*");
+    printf("0");
   }
   else if (cell == CELL_IS_DEAD){
     printf(" ");
