@@ -227,6 +227,14 @@ int get_updated_cell(int x, int y) {
   return cell;
 }
 
+void merge_board(int other_board[][SCREEN_WIDTH]) {
+  for (int i = 0; i < SCREEN_HEIGHT; i++) {
+    for (int j = 0; j < SCREEN_WIDTH; j++) {
+      board[i][j] = other_board[i][j];
+    }
+  }
+}
+
 void update_board() {
   int temp_board[SCREEN_HEIGHT][SCREEN_WIDTH] = {0};
   for(int y = 0; y < SCREEN_HEIGHT; y++) {
@@ -235,11 +243,7 @@ void update_board() {
       temp_board[y][x] = cell;
     }
   }
-  for (int i = 0; i < SCREEN_HEIGHT; i++) {
-    for (int j = 0; j < SCREEN_WIDTH; j++) {
-      board[i][j] = temp_board[i][j];
-    }
-  }
+  merge_board(temp_board);
 }
 
 int at_least_one_cell_is_alive() {
@@ -276,11 +280,11 @@ int main( int arg_count, char *args[] )  {
         tTuple tuple = tuples[i];
         board[tuple.y][tuple.x] = CELL_IS_ALIVE;
     }
+
+    // Run board
     print_board();
     usleep(SECONDS_TO_SLEEP);
-    int my_time = SECONDS_TO_SLEEP;
     while(1) {
-      printf("\n================================================================================%d", my_time);
       if (!at_least_one_cell_is_alive()) {
         printf("\nNo cells are alive. Terminating program");
         return 0;
@@ -288,7 +292,6 @@ int main( int arg_count, char *args[] )  {
       update_board();
       print_board();
       usleep(SECONDS_TO_SLEEP);
-      my_time += SECONDS_TO_SLEEP;
     }
     return 0;
 }
