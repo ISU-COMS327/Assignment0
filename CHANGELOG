@@ -1,0 +1,92 @@
+commit 13fa51f
+Author:     Joe McGovern <joseph.mcgovern@workiva.com>
+AuthorDate: Mon Jan 9 15:53:16 2017 -0600
+Commit:     Joe McGovern <joseph.mcgovern@workiva.com>
+CommitDate: Mon Jan 9 15:53:16 2017 -0600
+
+    Initial commit
+
+commit 99af6dc
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Tue Jan 10 08:43:57 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Tue Jan 10 08:43:57 2017 -0600
+
+    Somewhat working. Implemented some for loops. Only about
+    two iterations are happening at this point.
+
+commit ca62b71
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Tue Jan 10 10:02:19 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Tue Jan 10 10:02:19 2017 -0600
+
+    Working a little bit better. I'm getting about 8 iterations
+    at this point.
+
+commit 08cb504
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Tue Jan 10 10:04:41 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Tue Jan 10 10:04:41 2017 -0600
+
+    Cleaned up code my removing an unneccessary variable
+    assignment.
+
+commit 7dcfbc6
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Tue Jan 10 16:58:09 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Tue Jan 10 16:58:09 2017 -0600
+
+    Fixed a few bugs around array indexing. Also split some
+    code out into functions for easier reusability.
+
+commit 567b476
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Tue Jan 10 17:03:17 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Tue Jan 10 17:03:17 2017 -0600
+
+    Cleaned up code by assigning a value to a variable
+    instead of assigning it directly.
+
+commit 76701e6
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Wed Jan 11 15:32:47 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Wed Jan 11 15:32:47 2017 -0600
+
+    Updated conditionals to follow guidelines.
+
+commit 625ac0a
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Wed Jan 11 15:33:20 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Wed Jan 11 15:33:20 2017 -0600
+
+    Remove file created by emacs.
+
+commit 3daab38
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Wed Jan 11 15:54:58 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Wed Jan 11 15:54:58 2017 -0600
+
+    Cleaned up some code by splitting it out into a function.
+
+commit e6bc193
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Wed Jan 11 15:55:35 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Wed Jan 11 15:55:35 2017 -0600
+
+    add gitignore to remove .DS_Store files from my repo
+
+commit 0f4911b (HEAD -> master, origin/master, origin/HEAD)
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Wed Jan 11 15:56:39 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Wed Jan 11 15:56:39 2017 -0600
+
+    remove .DS_Store file
