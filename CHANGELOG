@@ -90,3 +90,11 @@ Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
 CommitDate: Wed Jan 11 15:56:39 2017 -0600
 
     remove .DS_Store file
+
+commit 054de67 (HEAD -> master, origin/master, origin/HEAD)
+Author:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+AuthorDate: Wed Jan 11 18:25:23 2017 -0600
+Commit:     Joseph McGovern <joseph.mcgovern@webfilings.com>
+CommitDate: Wed Jan 11 18:25:23 2017 -0600
+
+    Add Makefile and CHANGELOG
