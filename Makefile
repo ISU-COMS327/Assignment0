@@ -2,7 +2,7 @@ CC=gcc
 TARGET=main
 
 $(TARGET): $(TARGET).c
-	@gcc $(TARGET).c -o $(TARGET)
+	@gcc $(TARGET).c -o $(TARGET) -Wall -Werror -ggdb
 	@echo "Made $(TARGET)"
 
 .PHONY: clean

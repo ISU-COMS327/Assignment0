@@ -11,7 +11,7 @@
 #define SECONDS_TO_SLEEP 83333
 #define MAX_NUMBER_OF_NEIGHBORS 4
 
-static int board[SCREEN_HEIGHT][SCREEN_WIDTH] = {0};
+static int board[SCREEN_HEIGHT][SCREEN_WIDTH] = {{0}};
 
 typedef struct {
   int x;
@@ -236,7 +236,7 @@ void merge_board(int other_board[][SCREEN_WIDTH]) {
 }
 
 void update_board() {
-  int temp_board[SCREEN_HEIGHT][SCREEN_WIDTH] = {0};
+  int temp_board[SCREEN_HEIGHT][SCREEN_WIDTH] = {{0}};
   for(int y = 0; y < SCREEN_HEIGHT; y++) {
     for (int x = 0; x < SCREEN_WIDTH; x++) {
       int cell = get_updated_cell(x, y);
